@@ -1,0 +1,4 @@
+﻿question_id,pattern_id,prefix,c1,c2,c3,c4,star,suffix,translation_en
+O001,P002,,彼が,ミスを,した,せいで,3,、みんなが残業することになった。,"Because he made a mistake, everyone ended up working overtime."
+O002,P003,先生が,手伝って,くれた,おかげで,無事に,3,終わった。,"Thanks to the teacher's help, it finished without trouble."
+O003,P041,昨日は,大雨の,ため,電車が,全部,3,止まった。,"Yesterday, all the trains stopped because of the heavy rain."

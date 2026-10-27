@@ -1,0 +1,9 @@
+﻿group_id,group_name_ja,group_name_en,order
+G01,原因・理由,Cause and reason,1
+G02,逆接・予想外,Contrast and unexpected results,2
+G03,目的・決定・変化,"Purpose, decisions and change",3
+G04,時・タイミング,Time and timing,4
+G05,基準・立場・比較,"Standards, viewpoints and comparison",5
+G06,様子・傾向・程度,"State, tendency and degree",6
+G07,追加・仮定・条件,"Addition, supposition and conditions",7
+G08,判断・推量・義務,"Judgment, inference and obligation",8
