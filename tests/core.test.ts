@@ -106,3 +106,13 @@ describe('app', () => {
     expect(JSON.parse(store['n3drill-v3']).plan.start).not.toBeNull();
   });
 });
+
+import { plain, rich } from '../src/ui/common';
+describe('notation', () => {
+  it('turns 漢字[かな] into ruby and \\n into a line break', () => {
+    expect(rich('経験[けいけん]を積む\\n次の行')).toBe('<ruby>経験<rt>けいけん</rt></ruby>を積む<br>次の行');
+    expect(rich('a\nb')).toBe('a<br>b');
+    expect(rich('<b>x</b>')).toBe('&lt;b&gt;x&lt;/b&gt;');
+    expect(plain('経験[けいけん]\\nです')).toBe('経験 です');
+  });
+});

@@ -2,7 +2,7 @@ import type { Ctx } from '../ctx';
 import { IV, dueIds, lowAccuracyIds, notebook, unsureIds, yesterdayWrongIds } from '../srs';
 import { keyOf, wdayOf } from '../store';
 import type { Section } from '../types';
-import { chips, esc, runBtn } from './common';
+import { chips, esc, plain, rich, runBtn } from './common';
 
 function secChips(c: Ctx): string {
   return chips(
@@ -73,7 +73,7 @@ function notebookPanel(c: Ctx): string {
         const right = q.choices[q.answer].text;
         const wrong = e.lastChoice;
         title = q.type === 'order' && q.order ? q.order.prefix + q.order.chunks.join('') + q.order.suffix : q.stem;
-        body = `<p><b>正解:</b> ${esc(right)}</p>` + (wrong ? `<p><b>あなたの答え:</b> ${esc(wrong)}</p>` : '');
+        body = `<p><b>正解:</b> ${rich(right)}</p>` + (wrong ? `<p><b>あなたの答え:</b> ${rich(wrong)}</p>` : '');
         const pat = q.refId ? bank.patternById.get(q.refId) : undefined;
         if (pat) body += `<button class="ghost" data-act="lesson" data-id="${esc(pat.id)}">解説を見る · ${esc(pat.pattern)}</button>`;
       } else if (it.w) {
@@ -83,7 +83,7 @@ function notebookPanel(c: Ctx): string {
       const open = !!c.ui.nbOpen[e.id];
       return (
         `<li class="nb"><button class="nbhead" data-act="nbtoggle" data-id="${esc(e.id)}" aria-expanded="${open}">` +
-        `<span class="nbt">${esc(title)}</span><span class="nbm">${e.resolved ? '解決済み' : '未解決'} · ×${e.wrongCount} · ${keyOf(e.lastWrong).slice(5)}${e.unsure ? ' · 迷った' : ''}</span></button>` +
+        `<span class="nbt">${esc(plain(title))}</span><span class="nbm">${e.resolved ? '解決済み' : '未解決'} · ×${e.wrongCount} · ${keyOf(e.lastWrong).slice(5)}${e.unsure ? ' · 迷った' : ''}</span></button>` +
         (open ? `<div class="nbbody">${body}</div>` : '') +
         `</li>`
       );

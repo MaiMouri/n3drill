@@ -1,5 +1,5 @@
 import type { Ctx, Run } from '../ctx';
-import { esc, lessonBody, stemHtml, tx } from './common';
+import { esc, lessonBody, rich, stemHtml, tx } from './common';
 
 const LETTERS = ['ア', 'イ', 'ウ', 'エ'];
 
@@ -18,7 +18,7 @@ function quizView(c: Ctx, r: Run): string {
     .map((o, i) => {
       let cl = 'opt';
       if (answered) cl += i === q.ans ? ' good' : i === r.sel ? ' bad' : ' dim';
-      return `<button class="${cl}" data-act="answer" data-i="${i}"${answered ? ' disabled' : ''}><span class="n">${LETTERS[i]}</span><span class="tx">${esc(o.text)}</span></button>`;
+      return `<button class="${cl}" data-act="answer" data-i="${i}"${answered ? ' disabled' : ''}><span class="n">${LETTERS[i]}</span><span class="tx">${rich(o.text)}</span></button>`;
     })
     .join('');
   let fb = '';
@@ -28,17 +28,17 @@ function quizView(c: Ctx, r: Run): string {
     const right = q.opts[q.ans];
     let body = '';
     if (q.detail) body += `<p>${q.detail}</p>`;
-    if (!ok && (chosen.explain.ja || chosen.explain.en)) body += `<p><b>${esc(chosen.text)}</b><br>${tx(c, chosen.explain)}</p>`;
-    if (right.explain.ja || right.explain.en) body += `<p><b>${esc(right.text)}</b><br>${tx(c, right.explain)}</p>`;
+    if (!ok && (chosen.explain.ja || chosen.explain.en)) body += `<p><b>${rich(chosen.text)}</b><br>${tx(c, chosen.explain)}</p>`;
+    if (right.explain.ja || right.explain.en) body += `<p><b>${rich(right.text)}</b><br>${tx(c, right.explain)}</p>`;
     if (q.summary.ja || q.summary.en) body += `<p>${tx(c, q.summary)}</p>`;
     const pat = q.refId ? c.bank.patternById.get(q.refId) : undefined;
     if (pat) body += `<button class="ghost" data-act="lesson" data-id="${esc(pat.id)}">解説を見る · ${esc(pat.pattern)}</button>`;
     fb =
-      `<div class="fb ${ok ? 'good' : 'bad'}" role="status"><p class="verdict">${ok ? '正解 Correct' : `不正解 · 答え: ${esc(right.text)}`}</p>${body}</div>`;
+      `<div class="fb ${ok ? 'good' : 'bad'}" role="status"><p class="verdict">${ok ? '正解 Correct' : `不正解 · 答え: ${rich(right.text)}`}</p>${body}</div>`;
   }
   return (
     head(r, r.qs.length) +
-    (q.instruction ? `<p class="hint">${esc(q.instruction)}</p>` : q.hint ? `<p class="hint">${esc(q.hint)}</p>` : '') +
+    (q.instruction ? `<p class="hint">${rich(q.instruction)}</p>` : q.hint ? `<p class="hint">${esc(q.hint)}</p>` : '') +
     stemHtml(q, answered) +
     `<div class="opts">${opts}</div>` +
     `<button class="secondary sm flagbtn" data-act="flag" aria-pressed="${r.flag}">迷った · Not sure${r.flag ? ' ✓' : ''}</button>` +
@@ -99,7 +99,7 @@ function resultView(c: Ctx, r: Run): string {
   const miss = r.missed
     .map((id) => {
       const q = r.qs.find((x) => x.id === id);
-      return q ? `<li><b>${esc(q.completed)}</b></li>` : '';
+      return q ? `<li><b>${rich(q.completed)}</b></li>` : '';
     })
     .join('');
   return (

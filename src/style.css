@@ -212,3 +212,5 @@ label.lb{font-size:.85rem;font-weight:700;display:block;margin-bottom:6px}
 .flagbtn{align-self:flex-start}
 .flagbtn[aria-pressed="true"]{background:var(--soft);border-color:var(--accent);color:var(--accent)}
 .wd-hint{font-size:.85rem;color:var(--muted)}
+ruby{ruby-position:over}
+rt{font-size:.5em;font-weight:400;color:var(--muted)}

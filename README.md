@@ -32,3 +32,8 @@ Reading and listening questions are not supported yet; the daily plan has a chec
 ## How the plan works
 Days 1–30 unlock grammar lessons, words and kanji words in equal daily amounts; days 31–36 drill weak spots; days 37–40 are mock tests.
 Review uses boxes with 0/1/3/6/12-day gaps: a wrong answer is due again today, a right answer moves up. "迷った" keeps an item from moving up.
+
+## Text notation in CSV cells
+- Furigana: `経験[けいけん]` is shown as ruby (the kanji run directly before `[` gets the reading).
+- Line break: type `\n`, or put a real line break inside a quoted cell.
+- HTML tags are not allowed; they are shown as plain text.
